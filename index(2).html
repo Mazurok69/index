@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Каталог товарів</title>
+  <style>
+    html { font-size: 16px; }
+
+    body {
+      background: #fc95f9;
+      font-family: Arial, sans-serif;
+      padding: 12rem 3rem 3rem;
+      text-align: center;
+    }
+
+    .product {
+      display: inline-block;
+      width: 12.5rem;
+      margin: 0.625rem;
+      padding: 0.625rem;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      position: relative;
+      vertical-align: top;
+      text-align: center;
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 0.3rem;
+    }
+
+    .product h3,
+    .price {
+      font-size: 1rem;
+      margin: 0.5rem 0;
+    }
+
+    .price {
+      color: red;
+      font-weight: bold;
+    }
+
+    .buttons {
+      margin-top: 0.5rem;
+    }
+
+    .buttons button {
+      font-size: 0.875rem;
+      padding: 0.3rem 0.6rem;
+      margin-right: 0.3rem;
+      border: none;
+      background: #8000ff;
+      color: #fff;
+      border-radius: 0.3rem;
+      cursor: pointer;
+    }
+
+    .heart {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      color: red;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .inactive {
+      opacity: 0.4;
+    }
+
+    .selected {
+      outline: 3px solid #00cc00;
+    }
+
+    .cart-button {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Кнопка кошика -->
+<button class="cart-button" onclick="alertSelected()">Кошик</button>
+
+<!-- Товари -->
+<div class="product">
+  <div class="heart">&hearts;</div>
+  <img src="penis.jpeg" alt="Іграшка">
+  <h3>Дитяча іграшка</h3>
+  <div class="price">$69.69</div>
+  <div class="buttons">
+    <button onclick="selectProduct(event)">В кошик</button>
+    <button>Купити</button>
+  </div>
+</div>
+
+<div class="product">
+  <div class="heart">&hearts;</div>
+  <img src="maska.jpeg" alt="Маска">
+  <h3>Голова мера Одеси Дарта Вейдера Васильовича</h3>
+  <div class="price">$9.99</div>
+  <div class="buttons">
+    <button onclick="selectProduct(event)">В кошик</button>
+    <button>Купити</button>
+  </div>
+</div>
+
+<div class="product">
+  <div class="heart">&hearts;</div>
+  <img src="mers.jpeg" alt="Гавнодави">
+  <h3>Самі модні туфлі на селі в мене дід в таких вже 10 літ ходить</h3>
+  <div class="price">$33.33</div>
+  <div class="buttons">
+    <button onclick="selectProduct(event)">В кошик</button>
+    <button>Купити</button>
+  </div>
+</div>
+
+<div class="product">
+  <div class="heart">&hearts;</div>
+  <img src="negro.jpg" alt="Негро">
+  <h3>Самий білий дід на селі</h3>
+  <div class="price">$0.69</div>
+  <div class="buttons">
+    <button onclick="selectProduct(event)">В кошик</button>
+    <button>Купити</button>
+  </div>
+</div>
+
+<div class="product">
+  <div class="heart">&hearts;</div>
+  <img src="krek.jpg" alt="Krek">
+  <h3>Крек упаковки по 10 грам</h3>
+  <div class="price">$330</div>
+  <div class="buttons">
+    <button onclick="selectProduct(event)">В кошик</button>
+    <button>Купити</button>
+  </div>
+</div>
+
+<div class="product">
+  <div class="heart">&hearts;</div>
+  <img src="kontrakt.jpeg" alt="Контракт">
+  <h3>Special offer</h3>
+  <div class="price">Free</div>
+  <div class="buttons">
+    <button onclick="selectProduct(event)">В кошик</button>
+    <button>Купити</button>
+  </div>
+</div>
+
+<div class="product inactive">
+  <div class="heart">&hearts;</div>
+  <img src="crocs.jpg" alt="Crocs">
+  <h3>Крокси маквін</h3>
+  <div class="price">$250</div>
+  <div class="buttons">
+    <button onclick="selectProduct(event)">В кошик</button>
+    <button>Купити</button>
+  </div>
+</div>
+
+<script>
+  function selectProduct(event) {
+    event.stopPropagation(); // щоб клік не доходив до іншого
+
+    var button = event.target;
+    var product = button.closest(".product");
+
+    if (product.classList.contains("inactive")) {
+      alert("Товар не в наявності");
+      return;
+    }
+
+    product.classList.toggle("selected");
+  }
+
+  function alertSelected() {
+    var selectedElements = document.getElementsByClassName("selected");
+    if (selectedElements.length === 0) {
+      alert("Ви нічого не вибрали.");
+      return;
+    }
+
+    var message = 'У вибраному:\n\n';
+
+    for (let i = 0; i < selectedElements.length; i++) {
+      const h3 = selectedElements[i].querySelector("h3");
+      message += "- " + (h3 ? h3.innerText : "Без назви") + "\n";
+    }
+
+    alert(message);
+  }
+</script>
+
+</body>
+</html>
+
